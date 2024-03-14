@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import BookList from '@/components/BookList.vue'
 </script>
 
 <template>
   <main>
-    Hello world
+    Search bar should be here
+    <book-list/>
   </main>
 </template>
