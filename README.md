@@ -1,10 +1,5 @@
 # SMIT take home assignment (Library)
 
-Purpose was to create a simple library with following requriements.
-
-Loo väike rakendus, kus on raamatukogu funktsionaalsus (lisamine, kataloog, laenutus ja tagastamine). Rakendus koosneb kahest osast – UI (Vue) ja backend Micronaut(Groovy). Backend peab pakkuma andmeid JSON formaadis üle REST endpointide. UI võib asuda ka serveri komponendi sees, aga peab kasutama andmete kuvamiseks ainult vastavaid REST teenuseid. REST teenused peavad olema kaetud integratsioonitestidega ning omama healthchecki.
-Lahendus peab kasutama andmebaasi Postgresql.
-
 ## Usage
 
 ### Running the Backend
