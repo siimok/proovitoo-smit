@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import { ref } from 'vue'
+import BookCard from '@/components/BookCard.vue'
 
 const books = ref([])
 const fetchBooks = async () => {
@@ -20,9 +21,15 @@ fetchBooks()
 </script>
 
 <template>
-  <div>
-    {{ books }}
+  <div class="grid grid-cols-4 gap-4">
+    <div
+      v-for="book in books"
+      :key="book.id"
+    >
+      <book-card :book></book-card>
+    </div>
   </div>
+
 </template>
 
 <style scoped>

@@ -1,9 +1,21 @@
 <script setup lang="ts">
+import type { PropType } from 'vue'
+import type { Book } from '@/types/types'
 
+const props = defineProps({ book: { type: Object as PropType<Book> } })
 </script>
 
 <template>
-  <div></div>
+  <div class="relative border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-72 h-64 p-4">
+    <div
+      class="absolute right-2 top-2  w-5 h-5 bg-red-600 rounded-full"
+      :class="book?.available ? 'bg-green-600' : 'bg-red-600'"
+    ></div>
+    <h2 class="text-center font-bold text-2xl">{{ book?.title }}</h2>
+    <h3 class="text-center font-semibold text-xl mt-3">{{ book?.author }}</h3>
+    <h3 class="text-right mt-2">Avaldatud: {{ book?.published }}</h3>
+    <p>{{ book?.description }}</p>
+  </div>
 </template>
 
 <style scoped>
