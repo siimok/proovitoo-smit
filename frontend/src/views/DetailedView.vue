@@ -29,10 +29,10 @@ fetchBook()
 
 const deleteBook = async () => {
   try {
-    await fetch('http://localhost:8080/api/books/' + route.params.id, { method: 'DELETE' });
-    console.log('Book deleted successfully.');
+    await fetch('http://localhost:8080/api/books/' + route.params.id, { method: 'DELETE' })
+    await router.push('/')
   } catch (error) {
-    console.error('Error deleting book:', error);
+    console.error('Error deleting book:', error)
   }
 }
 fetchBook()
