@@ -38,7 +38,7 @@ function publish() {
 </script>
 
 <template>
-  <main class="flex items-center justify-center flex-col mt-10">
+  <main class="flex items-center justify-center flex-col mt-10 ">
     <h1 class="font-bold text-3xl mb-7">Lisa uus raamat</h1>
     <book-form
       :book-data="book"
