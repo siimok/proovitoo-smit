@@ -7,6 +7,10 @@ import router from '@/router'
 
 const route = useRoute()
 
+import { useSnackbarStore } from '@/stores/snackbarStore'
+
+const snackbarStore = useSnackbarStore()
+
 const book = ref({
   id: -1,
   title: '',
@@ -20,11 +24,11 @@ const fetchBook = async () => {
   try {
     const response = await fetch('http://localhost:8080/api/books/' + route.params.id)
     if (!response.ok) {
-      console.log('response wasnt OK')
+      snackbarStore.setErrorSnackbar('Esines viga raamatu pärimisel')
     }
-    book.value = await response.json() // Update the books variable with the fetched data
+    book.value = await response.json()
   } catch (error) {
-    console.error(error)
+    snackbarStore.setErrorSnackbar('Esines viga serveriga ühendumisel')
   }
 }
 
@@ -38,18 +42,15 @@ function publish() {
   }
   fetch('http://localhost:8080/api/books/' + book.value.id, requestOptions)
     .then(async response => {
-      const isJson = response.headers.get('content-type')?.includes('application/json')
-      const data = isJson && await response.json()
-
       if (!response.ok) {
-        const error = (data && data.message) || response.status
-        return Promise.reject(error)
+        snackbarStore.setErrorSnackbar('Raamatu muutmisel esines viga')
+        return
       }
-
+      snackbarStore.setSuccessSnackbar("Raamatu muutmine õnnestus")
       await router.push('/')
     })
-    .catch(error => {
-      console.error('There was an error!', error)
+    .catch(e => {
+      snackbarStore.setErrorSnackbar('Esines viga serveriga ühendumisel')
     })
 }
 

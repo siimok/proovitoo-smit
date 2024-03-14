@@ -1,6 +1,9 @@
 <script setup lang="ts">
 
 import { computed, ref } from 'vue'
+import { useSnackbarStore } from '@/stores/snackbarStore'
+
+const snackbarStore = useSnackbarStore()
 
 const book = defineModel<any>('bookData')
 const emit = defineEmits(['publish'])
@@ -53,6 +56,9 @@ function validate() {
 
   if (!validateError.value) {
     emit('publish')
+  }
+  else{
+    snackbarStore.setErrorSnackbar("Palun paranda väli/väljad")
   }
 }
 

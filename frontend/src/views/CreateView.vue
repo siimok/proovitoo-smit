@@ -2,6 +2,9 @@
 import BookForm from '@/components/BookForm.vue'
 import { ref } from 'vue'
 import router from '@/router'
+import { useSnackbarStore } from '@/stores/snackbarStore'
+
+const snackbarStore = useSnackbarStore()
 
 const book = ref({
   title: '',
@@ -19,20 +22,17 @@ function publish() {
   };
   fetch('http://localhost:8080/api/books/', requestOptions)
     .then(async response => {
-      const isJson = response.headers.get('content-type')?.includes('application/json');
-      const data = isJson && await response.json();
 
-      // check for error response
       if (!response.ok) {
-        // get error message from body or default to response status
-        const error = (data && data.message) || response.status;
-        return Promise.reject(error);
+        snackbarStore.setErrorSnackbar("Esinest viga uue raamatu lisamisel")
+        return
       }
 
+      snackbarStore.setSuccessSnackbar("Raamatu lisamine õnnestus!")
       await router.push("/");
     })
-    .catch(error => {
-      console.error("There was an error!", error);
+    .catch(e => {
+      snackbarStore.setErrorSnackbar("Esinest viga Serveriga ühendumisel")
     });
 }
 </script>

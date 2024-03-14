@@ -3,6 +3,9 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router'
+import { useSnackbarStore } from '@/stores/snackbarStore'
+
+const snackbarStore = useSnackbarStore()
 
 const route = useRoute()
 
@@ -18,11 +21,12 @@ const fetchBook = async () => {
   try {
     const response = await fetch('http://localhost:8080/api/books/' + route.params.id)
     if (!response.ok) {
-      console.log('response wasnt OK')
+      snackbarStore.setErrorSnackbar('Esines viga uue raamatu lisamisel')
+      return
     }
-    book.value = await response.json() // Update the books variable with the fetched data
+    book.value = await response.json()
   } catch (error) {
-    console.error(error)
+    snackbarStore.setErrorSnackbar('Serveriga ühindumisel esines viga')
   }
 }
 fetchBook()
@@ -30,9 +34,10 @@ fetchBook()
 const deleteBook = async () => {
   try {
     await fetch('http://localhost:8080/api/books/' + route.params.id, { method: 'DELETE' })
+    snackbarStore.setSuccessSnackbar('Raamatu kustutamine õnnstus!')
     await router.push('/')
   } catch (error) {
-    console.error('Error deleting book:', error)
+    snackbarStore.setErrorSnackbar('Esinest viga raamatu kustutamisel')
   }
 }
 fetchBook()
@@ -45,23 +50,19 @@ const changeBookAvailability = async () => {
   }
   fetch('http://localhost:8080/api/books/' + route.params.id + '/availability', requestOptions)
     .then(async response => {
-      const isJson = response.headers.get('content-type')?.includes('application/json')
-      const data = isJson && await response.json()
-
-      // check for error response
       if (!response.ok) {
-        // get error message from body or default to response status
-        const error = (data && data.message) || response.status
-        return Promise.reject(error)
+        snackbarStore.setErrorSnackbar('Esinest viga raamatu laenutamisel')
+        return
       }
-
+      snackbarStore.setSuccessSnackbar(
+        'Raamat ' + (book.value.available ? 'Laenutati' : 'Tagastati')
+      )
       await router.push('/')
     })
-    .catch(error => {
-      console.error('There was an error!', error)
+    .catch(e => {
+      snackbarStore.setErrorSnackbar('Esinest viga Serveriga ühendumisel')
     })
 }
-
 </script>
 
 
