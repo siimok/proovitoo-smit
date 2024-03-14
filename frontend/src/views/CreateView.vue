@@ -19,33 +19,35 @@ function publish() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(book.value)
-  };
+  }
   fetch('http://localhost:8080/api/books/', requestOptions)
     .then(async response => {
 
       if (!response.ok) {
-        snackbarStore.setErrorSnackbar("Esinest viga uue raamatu lisamisel")
+        snackbarStore.setErrorSnackbar('Esinest viga uue raamatu lisamisel')
         return
       }
 
-      snackbarStore.setSuccessSnackbar("Raamatu lisamine õnnestus!")
-      await router.push("/");
+      snackbarStore.setSuccessSnackbar('Raamatu lisamine õnnestus!')
+      await router.push('/')
     })
     .catch(e => {
-      snackbarStore.setErrorSnackbar("Esinest viga Serveriga ühendumisel")
-    });
+      snackbarStore.setErrorSnackbar('Esinest viga Serveriga ühendumisel')
+    })
 }
 </script>
 
 <template>
   <main class="flex items-center justify-center flex-col mt-10 ">
-    <h1 class="font-bold text-3xl mb-7">
-      Lisa uus raamat
-    </h1>
+    <div class="p-4 md:p-8 max-w-[45rem] w-full border border-gray-200 rounded-lg shadow">
+      <h1 class="font-bold text-3xl mb-7">
+        Lisa uus raamat
+      </h1>
 
-    <book-form
-      :book-data="book"
-      @publish="publish()"
-    />
+      <book-form
+        :book-data="book"
+        @publish="publish()"
+      />
+    </div>
   </main>
 </template>

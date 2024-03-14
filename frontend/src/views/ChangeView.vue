@@ -58,13 +58,16 @@ function publish() {
 
 <template>
   <main class="flex items-center justify-center flex-col mt-10 ">
-    <h1 class="font-bold text-3xl mb-7">
-      Lisa uus raamat
-    </h1>
+    <div class="p-4 md:p-8 max-w-[45rem] w-full border border-gray-200 rounded-lg shadow">
+      <h1 class="font-bold text-3xl mb-7">
+        Lisa uus raamat
+      </h1>
 
-    <book-form
-      :book-data="book"
-      @publish="publish()"
-    />
+      <book-form
+        :book-data="book"
+        @publish="publish()"
+      />
+    </div>
+
   </main>
 </template>

@@ -68,7 +68,7 @@ const changeBookAvailability = async () => {
 
 <template>
   <main class="flex items-center justify-center flex-col mt-10">
-    <div class="max-w-[40rem] w-full p-4">
+    <div class="p-4 md:p-8 max-w-[45rem] w-full border border-gray-200 rounded-lg shadow">
 
 
       <h1 class="text-center font-bold text-4xl mb-7 break-words">{{ book.title }}</h1>

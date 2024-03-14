@@ -65,7 +65,7 @@ function validate() {
 </script>
 
 <template>
-    <div class="p-4 max-w-[25rem] w-full">
+    <div>
       <div>
         <div class="flex justify-between">
           <label class="block text-lg font-medium">

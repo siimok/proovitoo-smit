@@ -11,12 +11,12 @@ const fetchBooks = async (title: string = '') => {
   try {
     const response = await fetch('http://localhost:8080/api/books/?title=' + title)
     if (!response.ok) {
-      snackbarStore.setErrorSnackbar("Raamatute pärimisel esines viga")
+      snackbarStore.setErrorSnackbar('Raamatute pärimisel esines viga')
       return
     }
     books.value = await response.json()
   } catch (error) {
-    snackbarStore.setErrorSnackbar("Serveriga ühindumisel esines viga")
+    snackbarStore.setErrorSnackbar('Serveriga ühindumisel esines viga')
   }
 }
 
@@ -60,10 +60,10 @@ fetchBooks()
 
         <div class="md:ml-5">
           <button
-            class="bg-blue-500 w-[14rem] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            class="bg-blue-500 w-[14rem] mt-4 md:mt-0 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             @click="showOnlyAvailable = !showOnlyAvailable"
           >
-            {{ showOnlyAvailable ?'Näita kõiki' : 'Näita ainult kohalolevaid'}}
+            {{ showOnlyAvailable ? 'Näita kõiki' : 'Näita ainult kohalolevaid' }}
           </button>
         </div>
       </div>

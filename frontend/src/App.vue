@@ -4,9 +4,9 @@ import TheSnackbar from '@/components/TheSnackbar.vue'
 
 <template>
   <header>
-    <nav class="bg-sky-500 h-14 text-center font-semibold text-xl pt-3">
+    <nav class="bg-sky-500 h-14 text-center font-semibold text-2xl pt-3">
       <router-link class="m-4" to="/">Pealeht</router-link>
-      <router-link class="m-4" to="/create">Loo uus</router-link>
+      <router-link class="m-4" to="/create">Lisa uus</router-link>
     </nav>
   </header>
 
