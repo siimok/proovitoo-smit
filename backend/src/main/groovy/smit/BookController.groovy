@@ -1,6 +1,5 @@
 package smit
 
-
 import groovy.transform.CompileStatic
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
@@ -57,8 +56,9 @@ class BookController {
     }
 
     @Delete("/{id}")
-    HttpResponse deleteById(@PathVariable Long id) {
+    HttpResponse<?> delete(Long id) {
         bookRepository.deleteById(id)
-        return HttpResponse.noContent()
+        HttpResponse.noContent()
     }
 }
+

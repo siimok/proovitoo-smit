@@ -27,13 +27,23 @@ const fetchBook = async () => {
 }
 fetchBook()
 
+const deleteBook = async () => {
+  try {
+    await fetch('http://localhost:8080/api/books/' + route.params.id, { method: 'DELETE' });
+    console.log('Book deleted successfully.');
+  } catch (error) {
+    console.error('Error deleting book:', error);
+  }
+}
+fetchBook()
+
 const changeBookAvailability = async () => {
   const requestOptions = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ availability: !book.value.available })
   }
-  fetch('http://localhost:8080/api/books/' + route.params.id + "/availability", requestOptions)
+  fetch('http://localhost:8080/api/books/' + route.params.id + '/availability', requestOptions)
     .then(async response => {
       const isJson = response.headers.get('content-type')?.includes('application/json')
       const data = isJson && await response.json()
@@ -83,6 +93,13 @@ const changeBookAvailability = async () => {
             Muuda
           </button>
         </router-link>
+
+        <button
+          class="mt-6 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+          @click="deleteBook"
+        >
+          Kustuta
+        </button>
       </div>
     </div>
   </main>
