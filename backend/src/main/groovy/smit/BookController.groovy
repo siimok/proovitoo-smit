@@ -11,7 +11,7 @@ import smit.domain.Book
 
 @CompileStatic
 @ExecuteOn(TaskExecutors.BLOCKING)
-@Controller('/book')
+@Controller('api/book')
 class BookController {
     private final BookRepository bookRepository
 

@@ -17,7 +17,7 @@ function publish() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(book.value)
   };
-  fetch('http://localhost:8080/book/', requestOptions)
+  fetch('http://localhost:8080/api/book/', requestOptions)
     .then(async response => {
       const isJson = response.headers.get('content-type')?.includes('application/json');
       const data = isJson && await response.json();
@@ -45,7 +45,6 @@ function publish() {
       @publish="publish()"
     />
   </main>
-
 </template>
 
 <style scoped>
