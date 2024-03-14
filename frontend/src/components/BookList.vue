@@ -23,7 +23,3 @@ const props = defineProps({ books: { type: Object as PropType<Array<Book>> } })
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

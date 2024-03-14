@@ -87,7 +87,3 @@ const changeBookAvailability = async () => {
     </div>
   </main>
 </template>
-
-<style scoped>
-
-</style>

@@ -13,18 +13,21 @@ const props = defineProps({ book: { type: Object as PropType<Book> } })
         :class="book?.available ? 'bg-green-600' : 'bg-red-600'"
       ></div>
 
-      <h2 class="h-16 text-center font-bold text-2xl capitalize overflow-ellipsis overflow-hidden">{{ book?.title
-        }}</h2>
+      <h2 class="h-16 text-center font-bold text-2xl capitalize overflow-ellipsis overflow-hidden">
+        {{ book?.title }}
+      </h2>
 
-      <h3 class="text-center capitalize font-semibold text-xl mt-3 truncate">{{ book?.author }}</h3>
+      <h3 class="text-center capitalize font-semibold text-xl mt-3 truncate">
+        {{ book?.author }}
+      </h3>
 
-      <h3 class="text-right mt-2">Avaldatud: {{ book?.published }}</h3>
+      <h3 class="text-right mt-2">
+        Avaldatud: {{ book?.published }}
+      </h3>
 
-      <p class="h-[4.5rem] capitalize text-ellipsis overflow-hidden">{{ book?.description }}</p>
+      <p class="h-[4.5rem] capitalize text-ellipsis overflow-hidden">
+        {{ book?.description }}
+      </p>
     </div>
   </router-link>
 </template>
-
-<style scoped>
-
-</style>

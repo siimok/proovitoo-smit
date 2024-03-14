@@ -41,9 +41,7 @@ function publish() {
       const isJson = response.headers.get('content-type')?.includes('application/json')
       const data = isJson && await response.json()
 
-      // check for error response
       if (!response.ok) {
-        // get error message from body or default to response status
         const error = (data && data.message) || response.status
         return Promise.reject(error)
       }
@@ -59,14 +57,13 @@ function publish() {
 
 <template>
   <main class="flex items-center justify-center flex-col mt-10 ">
-    <h1 class="font-bold text-3xl mb-7">Lisa uus raamat</h1>
+    <h1 class="font-bold text-3xl mb-7">
+      Lisa uus raamat
+    </h1>
+
     <book-form
       :book-data="book"
       @publish="publish()"
     />
   </main>
 </template>
-
-<style scoped>
-
-</style>

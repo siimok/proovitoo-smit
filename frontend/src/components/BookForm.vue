@@ -144,7 +144,9 @@ function validate() {
             Kirjeldus
           </label>
 
-          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">1000 tähemärki</span>
+          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">
+            1000 tähemärki
+          </span>
         </div>
 
         <textarea
@@ -172,7 +174,3 @@ function validate() {
       </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

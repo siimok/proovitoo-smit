@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <header>
     <nav class="bg-sky-500 h-14 text-center font-semibold text-xl pt-3">
@@ -11,6 +8,3 @@
 
   <RouterView />
 </template>
-
-<style scoped>
-</style>
