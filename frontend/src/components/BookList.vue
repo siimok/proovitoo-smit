@@ -2,8 +2,9 @@
 
 import { ref } from 'vue'
 import BookCard from '@/components/BookCard.vue'
+import type { Book } from '@/types/types'
 
-const books = ref([])
+const books = ref<Array<Book>>([])
 const fetchBooks = async () => {
   try {
     const response = await fetch('http://localhost:8080/book')
