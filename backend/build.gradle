@@ -42,6 +42,7 @@ java {
 
 graalvmNative.toolchainDetection = false
 micronaut {
+    ignoredAutomaticDependencies.add("io.micronaut.data:micronaut-data-processor")
     runtime("netty")
     testRuntime("spock2")
     processing {
