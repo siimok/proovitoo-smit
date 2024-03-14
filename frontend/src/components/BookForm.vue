@@ -34,19 +34,20 @@ function validate() {
   }
 
   // Validate author length
-  if (book.value.published === null || book.value.published === undefined) {
-    validationErrors.value.published = 'Aasta pole määratud'
-  } else if (book.value.author.length < 5) {
+  if (book.value.author.length < 5) {
     validationErrors.value.author = 'Autori nimi peab olema vähemalt 5 tähemärki'
   } else if (book.value.author.length > 100) {
     validationErrors.value.author = 'Autori nimi peab olema alla 100 tähemärgi'
   }
 
   // Validate published year
-  if (book.value.published < 0) {
-    validationErrors.value.published = 'Raamat peab olema noorem kui Kristus'
-  } else if (book.value.published > 2025) {
-    validationErrors.value.published = 'Ajarändureid me ei salli.'
+  const publishedYear = parseInt(book.value.published);
+  if (isNaN(publishedYear)) {
+    validationErrors.value.published = 'Aasta pole määratud';
+  } else if (publishedYear < 0) {
+    validationErrors.value.published = 'Raamat peab olema noorem kui Kristus';
+  } else if (publishedYear > 2025) {
+    validationErrors.value.published = 'Ajarändureid me ei salli.';
   }
 
   // Validate description length
@@ -56,127 +57,126 @@ function validate() {
 
   if (!validateError.value) {
     emit('publish')
-  }
-  else{
-    snackbarStore.setErrorSnackbar("Palun paranda väli/väljad")
+  } else {
+    snackbarStore.setErrorSnackbar('Palun paranda väli/väljad')
   }
 }
 
 </script>
 
 <template>
+  <div>
     <div>
-      <div>
-        <div class="flex justify-between">
-          <label class="block text-lg font-medium">
-            Raamatu nimi
-          </label>
+      <div class="flex justify-between">
+        <label class="block text-lg font-medium">
+          Raamatu nimi
+        </label>
 
-          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
-        </div>
-
-        <input
-          v-model="book.title"
-          class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
-          maxlength="100"
-          @blur="validationErrors.title = ''"
-        >
+        <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
       </div>
 
-      <div class="h-8 text-red-600">
-        {{ validationErrors.title }}
+      <input
+        v-model="book.title"
+        class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
+        maxlength="100"
+        @blur="validationErrors.title = ''"
+      >
+    </div>
+
+    <div class="h-8 text-red-600">
+      {{ validationErrors.title }}
+    </div>
+
+    <div>
+      <div class="flex justify-between">
+        <label class="block text-lg font-medium">
+          Autor
+        </label>
+
+        <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
       </div>
 
-      <div>
-        <div class="flex justify-between">
-          <label class="block text-lg font-medium">
-            Autor
-          </label>
+      <input
+        v-model="book.author"
+        class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
+        maxlength="100"
+        @blur="validationErrors.author = ''"
+      >
+    </div>
 
-          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
-        </div>
+    <div class="h-8 text-red-600">
+      {{ validationErrors.author }}
+    </div>
 
-        <input
-          v-model="book.author"
-          class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
-          maxlength="100"
-          @blur="validationErrors.author = ''"
-        >
-      </div>
-
-      <div class="h-8 text-red-600">
-        {{ validationErrors.author }}
-      </div>
-
-      <div>
-        <div class="flex justify-between">
-          <label class="block text-lg font-medium">
-            Avaldamise aasta
-          </label>
-        </div>
-
-        <input
-          v-model="book.published"
-          class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
-          type="text" pattern="[0-9]{4}"
-          placeholder="YYYY"
-          maxlength="4"
-          required
-          @blur="validationErrors.published = ''"
-        >
-      </div>
-
-      <div class="h-8 text-red-600">
-        {{ validationErrors.published }}
-      </div>
-
-      <div class="flex">
-        <input
-          v-model="book.available"
-          class="h-6 w-6 mr-2"
-          type="checkbox"
-          id="available"
-        />
-        <label
-          for="available"
-          class="flex text-sm font-semibold items-center"
-        >Kohal
+    <div>
+      <div class="flex justify-between">
+        <label class="block text-lg font-medium">
+          Avaldamise aasta
         </label>
       </div>
 
-      <div class="mt-6">
-        <div class="flex justify-between">
-          <label class="block text-lg font-medium">
-            Kirjeldus
-          </label>
+      <input
+        v-model="book.published"
+        class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
+        type="text" pattern="[0-9]{4}"
+        placeholder="YYYY"
+        maxlength="4"
+        required
+        @blur="validationErrors.published = ''"
+      >
+    </div>
 
-          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">
+    <div class="h-8 text-red-600">
+      {{ validationErrors.published }}
+    </div>
+
+    <div class="flex">
+      <input
+        v-model="book.available"
+        class="h-6 w-6 mr-2"
+        type="checkbox"
+        id="available"
+      />
+      <label
+        for="available"
+        class="flex text-sm font-semibold items-center"
+      >Kohal
+      </label>
+    </div>
+
+    <div class="mt-6">
+      <div class="flex justify-between">
+        <label class="block text-lg font-medium">
+          Kirjeldus
+        </label>
+
+        <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">
             1000 tähemärki
           </span>
-        </div>
-
-        <textarea
-          v-model="book.description"
-          class="w-full h-[5.4375rem] border rounded-b border-default pl-3 pr-4 py-2.5 text-base"
-          maxlength="1000"
-          rows="5"
-          @blur="validationErrors.description = ''"
-        ></textarea>
       </div>
 
-      <div class="h-8 text-red-600">
-        {{ validationErrors.description }}
-      </div>
-
-      <div class="flex justify-end">
-        <button
-          class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          :class="validateError ? 'bg-gray-700' : ''"
-          :disabled="validateError"
-          @click="validate"
-        >
-          Salvesta
-        </button>
-      </div>
+      <textarea
+        v-model="book.description"
+        class="w-full h-[5.4375rem] border rounded-b border-default pl-3 pr-4 py-2.5 text-base"
+        maxlength="1000"
+        rows="5"
+        @blur="validationErrors.description = ''"
+      ></textarea>
     </div>
+
+    <div class="h-8 text-red-600">
+      {{ validationErrors.description }}
+    </div>
+
+    <div class="flex justify-end">
+      <button
+        class="mt-6 text-white font-bold py-2 px-4 rounded"
+        :class="validateError ? 'bg-gray-700 hover:bg-gray-800' : 'bg-blue-500 hover:bg-blue-700'"
+        :disabled="validateError"
+        @click="validate"
+      >
+        Salvesta
+      </button>
+    </div>
+  </div>
 </template>
