@@ -165,7 +165,7 @@ function validate() {
           :disabled="validateError"
           @click="validate"
         >
-          Loo
+          Salvesta
         </button>
       </div>
     </div>
