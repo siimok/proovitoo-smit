@@ -1,12 +1,13 @@
 package smit
 
-import book.domain.Book
+
 import io.micronaut.transaction.annotation.ReadOnly
 import io.micronaut.transaction.annotation.Transactional
 import jakarta.inject.Singleton
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceException
 import jakarta.persistence.TypedQuery
+import smit.domain.Book
 
 @Singleton
 class BookRepository {
