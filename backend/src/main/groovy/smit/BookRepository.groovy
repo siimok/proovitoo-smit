@@ -1,12 +1,10 @@
 package smit
 
-
 import io.micronaut.transaction.annotation.ReadOnly
 import io.micronaut.transaction.annotation.Transactional
 import jakarta.inject.Singleton
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceException
-import jakarta.persistence.TypedQuery
 import smit.domain.Book
 
 @Singleton
@@ -36,9 +34,19 @@ class BookRepository {
 
     @ReadOnly
     List<Book> findAll() {
-        String queryStr = "SELECT b FROM Book b"
-        TypedQuery<Book> query = entityManager.createQuery(queryStr, Book)
-        query.resultList
+        return entityManager.createQuery("SELECT b FROM Book b", Book.class)
+                .getResultList();
+    }
+
+    @ReadOnly
+    List<Book> findAll(String title) {
+        if (title == null || title.isEmpty()) {
+            return findAll();
+        }
+        return entityManager.createQuery(
+                "SELECT b FROM Book b WHERE LOWER(b.title) LIKE LOWER(:title)", Book.class)
+                .setParameter("title", "%" + title.toLowerCase() + "%")
+                .getResultList();
     }
 
 

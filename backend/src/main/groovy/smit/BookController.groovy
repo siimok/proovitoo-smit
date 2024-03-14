@@ -20,8 +20,12 @@ class BookController {
     }
 
     @Get("/")
-    List<Book> getAllBooks() {
-        bookRepository.findAll()
+    List<Book> getAllBooks(@QueryValue String title) {
+        if (title && !title.isEmpty()) {
+            return bookRepository.findAll(title)
+        } else {
+            return bookRepository.findAll()
+        }
     }
 
     @Get("/{id}")
