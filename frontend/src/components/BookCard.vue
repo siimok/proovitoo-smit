@@ -6,7 +6,7 @@ const props = defineProps({ book: { type: Object as PropType<Book> } })
 </script>
 
 <template>
-  <router-link :to="'/book/' + book?.id">
+  <router-link :to="'/books/' + book?.id">
     <div class="relative border border-gray-200 rounded-lg shadow hover:bg-gray-100 w-72 h-64 p-4 m-4">
       <div
         class="absolute right-2 top-2  w-5 h-5 rounded-full"

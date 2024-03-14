@@ -6,7 +6,7 @@ import type { Book } from '@/types/types'
 const books = ref<Array<Book>>([])
 const fetchBooks = async (title: string = '') => {
   try {
-    const response = await fetch('http://localhost:8080/api/book/?title=' + title)
+    const response = await fetch('http://localhost:8080/api/books/?title=' + title)
     if (!response.ok) {
       console.log('response wasnt OK')
     }

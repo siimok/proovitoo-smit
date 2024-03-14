@@ -16,7 +16,7 @@ const book = ref({
 
 const fetchBook = async () => {
   try {
-    const response = await fetch('http://localhost:8080/api/book/' + route.params.id)
+    const response = await fetch('http://localhost:8080/api/books/' + route.params.id)
     if (!response.ok) {
       console.log('response wasnt OK')
     }
@@ -33,7 +33,7 @@ const changeBookAvailability = async () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ availability: !book.value.available })
   }
-  fetch('http://localhost:8080/api/book/' + route.params.id + "/availability", requestOptions)
+  fetch('http://localhost:8080/api/books/' + route.params.id + "/availability", requestOptions)
     .then(async response => {
       const isJson = response.headers.get('content-type')?.includes('application/json')
       const data = isJson && await response.json()
