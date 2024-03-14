@@ -3,7 +3,7 @@ import BookList from '@/components/BookList.vue'
 </script>
 
 <template>
-  <main>
+  <main class="flex flex-col items-center justify-center">
     Search bar should be here
     <book-list/>
   </main>
