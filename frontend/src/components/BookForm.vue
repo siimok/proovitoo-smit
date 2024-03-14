@@ -31,7 +31,9 @@ function validate() {
   }
 
   // Validate author length
-  if (book.value.author.length < 5) {
+  if (book.value.published === null || book.value.published === undefined) {
+    validationErrors.value.published = 'Aasta pole määratud'
+  } else if (book.value.author.length < 5) {
     validationErrors.value.author = 'Autori nimi peab olema vähemalt 5 tähemärki'
   } else if (book.value.author.length > 100) {
     validationErrors.value.author = 'Autori nimi peab olema alla 100 tähemärgi'

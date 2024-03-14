@@ -1,23 +1,10 @@
 <script setup lang="ts">
 
-import { ref } from 'vue'
-import BookCard from '@/components/BookCard.vue'
+import type { PropType } from 'vue'
 import type { Book } from '@/types/types'
+import BookCard from '@/components/BookCard.vue'
 
-const books = ref<Array<Book>>([])
-const fetchBooks = async () => {
-  try {
-    const response = await fetch('http://localhost:8080/api/book/?title=')
-    if (!response.ok) {
-      console.log('response wasnt OK')
-    }
-    books.value = await response.json() // Update the books variable with the fetched data
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-fetchBooks()
+const props = defineProps({ books: { type: Object as PropType<Array<Book>> } })
 
 </script>
 
@@ -28,6 +15,11 @@ fetchBooks()
       :key="book.id"
     >
       <book-card :book></book-card>
+    </div>
+    <div
+      v-if="books?.length === 0"
+      class="text-2xl font-semibold mt-4 text-center"
+    >Raamatuid ei ole
     </div>
   </div>
 </template>
