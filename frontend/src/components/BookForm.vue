@@ -139,7 +139,7 @@ function validate() {
     <div class="mt-6">
       <div class="flex justify-between">
         <label class="block text-lg font-medium">
-          Autor
+          Kirjeldus
         </label>
 
         <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">1000 tähemärki</span>
