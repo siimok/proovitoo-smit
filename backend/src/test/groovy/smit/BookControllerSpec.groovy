@@ -34,7 +34,7 @@ class BookControllerSpec extends Specification {
 
     void testFindNonExistingBookReturns404() {
         when:
-        blockingClient.exchange(HttpRequest.GET('/book/99'))
+        blockingClient.exchange(HttpRequest.GET('/api/books/99'))
 
         then:
         HttpClientResponseException e = thrown()
@@ -45,7 +45,7 @@ class BookControllerSpec extends Specification {
     void "test creating a Book"() {
         given:
         def book = new Book("aawaaa", "Peeter Tamm", 2022, true, "Raamatul on mingisugune kirjeldus")
-        def request = HttpRequest.POST("/book", book)
+        def request = HttpRequest.POST("/api/books", book)
 
         when:
         HttpResponse<Book> response = client.toBlocking().exchange(request, Book)
@@ -65,7 +65,7 @@ class BookControllerSpec extends Specification {
         Book book = new Book("Title", "Author", 2022, true, "Description")
 
         when:
-        HttpRequest<Book> createRequest = HttpRequest.POST("/book", book)
+        HttpRequest<Book> createRequest = HttpRequest.POST("/api/books", book)
         HttpResponse<Book> createResponse = client.toBlocking().exchange(createRequest, Book)
 
         then:
@@ -73,7 +73,7 @@ class BookControllerSpec extends Specification {
         Book createdBook = createResponse.body()
 
         when:
-        HttpRequest<Void> deleteRequest = HttpRequest.DELETE("/book/${createdBook.id}")
+        HttpRequest<Void> deleteRequest = HttpRequest.DELETE("/api/books/${createdBook.id}")
         HttpResponse<?> deleteResponse = client.toBlocking().exchange(deleteRequest)
 
         then:
@@ -82,7 +82,7 @@ class BookControllerSpec extends Specification {
 
     void "test fetching multiple books"() {
         given:
-        def request = HttpRequest.GET("/book")
+        def request = HttpRequest.GET("/api/books?title=''")
 
         when:
         HttpResponse<String> response = client.toBlocking().exchange(request, String)
@@ -103,12 +103,12 @@ class BookControllerSpec extends Specification {
         Book book = new Book("Title", "Author", 2022, true, "Description")
 
         when:
-        HttpRequest<Book> createRequest = HttpRequest.POST("/book", book)
+        HttpRequest<Book> createRequest = HttpRequest.POST("/api/books", book)
         HttpResponse<Book> createResponse = client.toBlocking().exchange(createRequest, Book)
         Book createdBook = createResponse.body()
 
         Book updatedBook = new Book( "Updated Title", "Updated Author", 2023, false, "Updated Description")
-        HttpRequest<Book> updateRequest = HttpRequest.PUT("/book/${createdBook.id}", updatedBook)
+        HttpRequest<Book> updateRequest = HttpRequest.PUT("/api/books/${createdBook.id}", updatedBook)
         HttpResponse<Book> updateResponse = client.toBlocking().exchange(updateRequest, Book)
 
         then:
