@@ -57,118 +57,118 @@ function validate() {
 </script>
 
 <template>
-  <div class="p-4">
-    <div>
-      <div class="flex justify-between">
-        <label class="block text-lg font-medium">
-          Raamatu nimi
-        </label>
+    <div class="p-4 max-w-[25rem] w-full">
+      <div>
+        <div class="flex justify-between">
+          <label class="block text-lg font-medium">
+            Raamatu nimi
+          </label>
 
-        <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
+          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
+        </div>
+
+        <input
+          v-model="book.title"
+          class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
+          maxlength="100"
+          @blur="validationErrors.title = ''"
+        >
       </div>
 
-      <input
-        v-model="book.title"
-        class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
-        maxlength="100"
-        @blur="validationErrors.title = ''"
-      >
-    </div>
-
-    <div class="h-8 text-red-600">
-      {{ validationErrors.title }}
-    </div>
-
-    <div>
-      <div class="flex justify-between">
-        <label class="block text-lg font-medium">
-          Autor
-        </label>
-
-        <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
+      <div class="h-8 text-red-600">
+        {{ validationErrors.title }}
       </div>
 
-      <input
-        v-model="book.author"
-        class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
-        maxlength="100"
-        @blur="validationErrors.author = ''"
-      >
-    </div>
+      <div>
+        <div class="flex justify-between">
+          <label class="block text-lg font-medium">
+            Autor
+          </label>
 
-    <div class="h-8 text-red-600">
-      {{ validationErrors.author }}
-    </div>
+          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">100 tähemärki</span>
+        </div>
 
-    <div>
-      <div class="flex justify-between">
-        <label class="block text-lg font-medium">
-          Avaldamise aasta
+        <input
+          v-model="book.author"
+          class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
+          maxlength="100"
+          @blur="validationErrors.author = ''"
+        >
+      </div>
+
+      <div class="h-8 text-red-600">
+        {{ validationErrors.author }}
+      </div>
+
+      <div>
+        <div class="flex justify-between">
+          <label class="block text-lg font-medium">
+            Avaldamise aasta
+          </label>
+        </div>
+
+        <input
+          v-model="book.published"
+          class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
+          type="text" pattern="[0-9]{4}"
+          placeholder="YYYY"
+          maxlength="4"
+          required
+          @blur="validationErrors.published = ''"
+        >
+      </div>
+
+      <div class="h-8 text-red-600">
+        {{ validationErrors.published }}
+      </div>
+
+      <div class="flex">
+        <input
+          v-model="book.available"
+          class="h-6 w-6 mr-2"
+          type="checkbox"
+          id="available"
+        />
+        <label
+          for="available"
+          class="flex text-sm font-semibold items-center"
+        >Kohal
         </label>
       </div>
 
-      <input
-        v-model="book.published"
-        class="mt-2 w-full h-[2.75rem] border rounded border-default pl-3 pr-4 py-2.5 text-base"
-        type="text" pattern="[0-9]{4}"
-        placeholder="YYYY"
-        maxlength="4"
-        required
-        @blur="validationErrors.published = ''"
-      >
-    </div>
+      <div class="mt-6">
+        <div class="flex justify-between">
+          <label class="block text-lg font-medium">
+            Kirjeldus
+          </label>
 
-    <div class="h-8 text-red-600">
-      {{ validationErrors.published }}
-    </div>
+          <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">1000 tähemärki</span>
+        </div>
 
-    <div class="flex">
-      <input
-        v-model="book.available"
-        class="h-6 w-6 mr-2"
-        type="checkbox"
-        id="available"
-      />
-      <label
-        for="available"
-        class="flex text-sm font-semibold items-center"
-      >Kohal
-      </label>
-    </div>
-
-    <div class="mt-6">
-      <div class="flex justify-between">
-        <label class="block text-lg font-medium">
-          Kirjeldus
-        </label>
-
-        <span class="inline-block text-sm text-gray-600 font-semibold ml-auto">1000 tähemärki</span>
+        <textarea
+          v-model="book.description"
+          class="w-full h-[5.4375rem] border rounded-b border-default pl-3 pr-4 py-2.5 text-base"
+          maxlength="1000"
+          rows="5"
+          @blur="validationErrors.description = ''"
+        ></textarea>
       </div>
 
-      <textarea
-        v-model="book.description"
-        class="w-full h-[5.4375rem] border rounded-b border-default pl-3 pr-4 py-2.5 text-base"
-        maxlength="1000"
-        rows="5"
-        @blur="validationErrors.description = ''"
-      ></textarea>
-    </div>
+      <div class="h-8 text-red-600">
+        {{ validationErrors.description }}
+      </div>
 
-    <div class="h-8 text-red-600">
-      {{ validationErrors.description }}
+      <div class="flex justify-end">
+        <button
+          class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          :class="validateError ? 'bg-gray-700' : ''"
+          :disabled="validateError"
+          @click="validate"
+        >
+          Loo
+        </button>
+      </div>
     </div>
-
-    <div class="flex justify-end">
-      <button
-        class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        :class="validateError ? 'bg-gray-700' : ''"
-        :disabled="validateError"
-        @click="validate"
-      >
-        Loo
-      </button>
-    </div>
-  </div>
 </template>
 
 <style scoped>
