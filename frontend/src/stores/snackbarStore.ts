@@ -2,14 +2,20 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useSnackbarStore = defineStore('snackbar', () => {
-  const genericSnackbar = ref<genericSnackbarType>({state: false, message: "", color: "green"})
+  const genericSnackbar = ref<genericSnackbarType>({ state: false, message: '', color: 'bg-green-500' })
 
   function setErrorSnackbar(errorMessage: string) {
-    genericSnackbar.value = {state: false, message: errorMessage, color: "red"}
+    genericSnackbar.value = { state: true, message: errorMessage, color: 'bg-red-500' }
+    setTimeout(() => {
+      genericSnackbar.value.state = false
+    }, 3000)
   }
 
   function setSuccessSnackbar(errorMessage: string) {
-    genericSnackbar.value = {state: false, message: errorMessage, color: "green"}
+    genericSnackbar.value = { state: true, message: errorMessage, color: 'bg-green-500' }
+    setTimeout(() => {
+      genericSnackbar.value.state = false
+    }, 3000)
   }
 
   type genericSnackbarType = {

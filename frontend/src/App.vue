@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import TheSnackbar from '@/components/TheSnackbar.vue'
+</script>
+
 <template>
   <header>
     <nav class="bg-sky-500 h-14 text-center font-semibold text-xl pt-3">
@@ -7,4 +11,6 @@
   </header>
 
   <RouterView />
+
+  <the-snackbar/>
 </template>
