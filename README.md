@@ -40,4 +40,4 @@ Lahendus peab kasutama andmebaasi Postgresql.
     npm run serve
     ```
 
-   The frontend application will be accessible at `http://localhost:8080`.
+   The frontend application will be accessible at `http://localhost:5713`.
